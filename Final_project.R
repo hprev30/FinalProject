@@ -27,3 +27,19 @@ surf_gom <- surf_gom[surf_gom$PCO2_MEA_UATM != -999,]
 la <- read.csv("C:/Users/hjp4906/Desktop/louisiana.csv")
 sum(la$Shape_Area)
 56106289218-17702794135
+areas <- read.csv(file='~/Desktop/Export_Intersect.txt')
+sum <- sum(areas$Shape_Area)
+(sum/38403495083)*100
+
+#getting oil rig numbers and exporting
+library('dplyr')
+gom <- read_xlsx(path = "~/Desktop/GOMECC-3 Cruise Data (1).xlsx")
+write.csv(oilrig, file = 'oilrigs.csv')
+write.table(gom, file='gom_full.txt', sep = '\t')
+getwd()
+gom2 <- read.csv(file = '~/Desktop/gom_full2.csv', header = T, stringsAsFactors = F)
+gom2 <- gom2[,-1]
+write.table(gom2, file = 'gom_odv.txt', sep ='\t')
+contains <- read.csv(file = '~/Desktop/spatial_join.csv')
+oilrig <- as.data.frame(table(contains$TARGET_FID))
+
